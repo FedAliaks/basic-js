@@ -22,7 +22,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/* domains */) {
+function getDNSStats(domains) {
+  
+  let obj = {};
+  domains.forEach(item => {
+    const temp = item.split('.').reverse();
+    console.log(temp);
+    let str = '';
+    for (let i = 0; i < temp.length; i++) {
+      str += '.' + temp[i];
+      findInObj(str);
+    }
+  })
+
+  function findInObj(item) {
+    item in obj ?  obj[item]++ : obj[item] = 1;
+  }
+
+
+  return obj;
+
+
+
+
+
   throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
 }
