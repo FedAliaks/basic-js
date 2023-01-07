@@ -14,7 +14,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function transform(arr) {
-  if(!Array.isArray(arr)) throw Error("\'arr\\");
+  if(!(arr instanceof Array)) throw Error(`\'arr\' parameter must be an instance of the Array!`);
 
   let answer = [];
   const indexMax = arr.length - 1;
