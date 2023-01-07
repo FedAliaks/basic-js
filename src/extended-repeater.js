@@ -22,7 +22,7 @@ function repeater(str, options) {
 
   optionsSeparator = (options.separator) ? options.separator : "+";
   optionsAdditionSeparator = (options.additionSeparator) ? options.additionSeparator : "|";
-  optionsAddition = (options.addition) ? options.addition  : "";
+  optionsAddition = (options.addition || options.addition === false || options.addition === null) ? '' + options.addition  : "";
 
 
 
