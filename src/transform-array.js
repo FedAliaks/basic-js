@@ -13,8 +13,8 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
+function transform(arr) {
+  //throw new NotImplementedError('Not implemented');
 
 
   if(!(arr instanceof Array)) throw Error(`\'arr\' parameter must be an instance of the Array!`);
@@ -24,15 +24,15 @@ function transform(/* arr */) {
   let discardNext = false;
 
   arr.forEach((item, index) => {
-    console.log('item: ' + item + ' index: ' + index)
+    //console.log('item: ' + item + ' index: ' + index)
     if(discardNext) {
       discardNext = false;
     } else if(item === '--double-next') {
       if(index !== indexMax) answer.push(arr[index + 1]);
     } else if(item === '--discard-prev') {
-      if(index !== 0) answer.pop();
+      if(index !== 0 && arr[index-2] != '--discard-next') answer.pop();
     } else if(item === '--double-prev') {
-      if(index !== 0) answer.push(arr[index - 1]);
+      if(index !== 0 && arr[index - 2] != '--discard-next') answer.push(arr[index - 1]);
     } else if (item === '--discard-next') {
       discardNext = true;
     } else {
