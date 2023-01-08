@@ -17,13 +17,68 @@ const { NotImplementedError } = require('../extensions/index.js');
  * ]
  *
  * The result should be following:
- * [
- *  [1, 2, 1],
- *  [2, 1, 1],
- *  [1, 1, 1]
+ * [     j
+ *  [1/, 2/, 1],
+ *  [2/, 1, 1],   i
+ *  [1/, 1/, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
+function minesweeper(matrix) {
+  const answer = Array(matrix.length);
+
+  for(let i = 0; i < matrix.length; i++) {
+    answer[i] = new Array(matrix[i].length)
+  }
+
+  
+  for (let i = 0; i < matrix.length; i++) {
+    for(let j = 0; j < matrix[i].length; j++) {
+      let count = 0;
+
+      if(i > 0) {
+        if(matrix[i - 1][j] === true) count++;
+      }
+      if(i < matrix.length - 1) {
+        if(matrix[i + 1][j] === true) count++;
+      }
+
+      if(i > 0 && j > 0) {
+        if(matrix[i - 1][j - 1] === true) count++;
+      }
+
+      if(j > 0) {
+        if(matrix[i][j - 1] === true) count++;
+      }
+
+      if(i < matrix.length - 1 && j > 0) {
+        if(matrix[i + 1][j - 1] === true) count++;
+      }
+
+      if(i > 0 && j < matrix[i].length - 1) {
+        if(matrix[i - 1][j + 1] === true) count++;
+      }
+
+      if(j < matrix[i].length - 1) {
+        if(matrix[i][j + 1] === true) count++;
+      }
+
+      if(i < matrix.length - 1 && j < matrix[i].length - 1) {
+        if(matrix[i + 1][j + 1] === true) count++;
+      }
+
+      answer[i][j] = count;
+    }
+  }
+
+  return answer;
+
+
+
+
+
+
+
+
   throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
 }
