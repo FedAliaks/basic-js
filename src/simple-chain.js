@@ -26,7 +26,8 @@ const chainMaker = {
   },
   removeLink(position) {
     if(position > this.chain.length || position <= 0 || isNaN(position) || position % 1 != 0) {
-      throw new Error(`You can't remove incorrect link!`);
+      this.chain = [];
+      throw Error (`You can't remove incorrect link!`);
     }
     this.chain.splice(position - 1, 1);
     return this;
