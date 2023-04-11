@@ -36,14 +36,12 @@ class VigenereCipheringMachine {
 
     let fullKey = key;
     let tempString = string.toUpperCase();
-    if(!this.direction) {
+/*     if(!this.direction) {
       tempString = tempString.split('').reverse().join('');
-    }
+    } */
     let answer = [];
     let countSpaces = 0;
-    if(!this.direction) {
-      tempString = tempString.split('').reverse().join();
-    }
+
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ';
     while(string.length > fullKey.length) {
@@ -63,6 +61,12 @@ class VigenereCipheringMachine {
 
     }
 
+    if(!this.direction) {
+      return answer.reverse().join('');
+    }
+
+
+
     return answer.join('');
 
 
@@ -78,6 +82,9 @@ class VigenereCipheringMachine {
     let answer = [];
     let tempString = string.toUpperCase();
     let countSpaces = 0;
+/*     if(!this.direction) {
+      tempString = tempString.split('').reverse().join();
+    } */
 
     while(string.length > fullKey.length) {
       fullKey += key;
@@ -98,7 +105,11 @@ class VigenereCipheringMachine {
 
     }
 
-/*     console.log(answer); */
+    if(!this.direction) {
+      return answer.reverse().join('');
+    }
+
+
 
     return answer.join('');
 
