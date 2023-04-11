@@ -20,12 +20,92 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 class VigenereCipheringMachine {
-  encrypt() {
-    throw new NotImplementedError('Not implemented');
+  constructor(direction) {
+    //true or false
+    if(direction === true || direction === undefined) {
+      this.direction = true;
+    } else {
+      this.direction = false;
+    }
+
+  }
+  encrypt(string, key) {
+    if(string === undefined || key === undefined) {
+      throw new Error('Incorrect arguments!');
+    }
+
+    let fullKey = key;
+    let tempString = string.toUpperCase();
+    if(!this.direction) {
+      tempString = tempString.split('').reverse().join('');
+    }
+    let answer = [];
+    let countSpaces = 0;
+    if(!this.direction) {
+      tempString = tempString.split('').reverse().join();
+    }
+
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    while(string.length > fullKey.length) {
+      fullKey += key;
+    }
+
+    fullKey = fullKey.slice(0, string.length).toUpperCase();
+
+    for(let i = 0; i < tempString.length; i++) {
+      if(tempString[i] === ' ' || alphabet.indexOf(tempString[i], 0) === -1) {
+        answer.push(tempString[i]);
+        countSpaces++;
+      } else {
+        let index = alphabet.indexOf(tempString[i], 0) + alphabet.indexOf(fullKey[i - countSpaces], 0);
+        answer.push(alphabet[index]);
+      }
+
+    }
+
+    return answer.join('');
+
+
+/*     throw new NotImplementedError('Not implemented'); */
     // remove line with error and write your code here
   }
-  decrypt() {
-    throw new NotImplementedError('Not implemented');
+  decrypt(string, key) {
+    if(string === undefined || key === undefined) {
+      throw new Error('Incorrect arguments!');
+    }
+
+    let fullKey = key;
+    let answer = [];
+    let tempString = string.toUpperCase();
+    let countSpaces = 0;
+
+    while(string.length > fullKey.length) {
+      fullKey += key;
+    }
+
+    fullKey = fullKey.slice(0, string.length).toUpperCase();
+    console.log(fullKey);
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    for(let i = 0; i < tempString.length; i++) {
+      if(tempString[i] === ' ' || alphabet.indexOf(tempString[i]) === -1) {
+        answer.push(tempString[i]);
+        countSpaces++;
+      } else {
+        let index = alphabet.lastIndexOf(tempString[i]) - alphabet.indexOf(fullKey[i - countSpaces], 0);
+        answer.push(alphabet[index]);
+      }
+
+    }
+
+/*     console.log(answer); */
+
+    return answer.join('');
+
+
+
+
+/*     throw new NotImplementedError('Not implemented'); */
     // remove line with error and write your code here
   }
 }
